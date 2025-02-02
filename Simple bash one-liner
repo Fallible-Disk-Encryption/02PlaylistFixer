@@ -1,0 +1,1 @@
+cat *.m3u | grep ^Podcasts | sed 's.Podcasts/.TF1:Podcasts\\.g' | sed 's./.\\.g' | tac > Newest\ First.m3u
