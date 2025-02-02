@@ -1,0 +1,36 @@
+Newest First Playlist
+
+cat *.m3u | grep ^Podcasts | sed 's.Podcasts/.TF1:Podcasts\\.g' | sed 's./.\\.g' | tac > Newest\ First.m3u
+
+
+### Explanations
+
+# cat *.m3u
+## Lists all the contents of .m3u files. This may be huge, I only have ~500 episodes so it works fine.
+
+# grep ^Podcasts
+### Just grabs all the lines starting with Podcasts, so none of the EXTINFO stuff.
+
+# sed 's.Podcasts/.TF1:Podcasts\\.g'
+## Replaces all the "Podcasts/" of the just-grabbed files and replaces it with "TF1:Podcasts\". My AGPTEK 02 will not "Find" any files unless the file hierarchy starts with TF1. I'm assuming that's the internal flash memory, but I don't know.
+
+# tac
+## Reverses the order so now they're sorted by Newest First :)
+
+# > Newest\ First.m3u
+##P Places all the stuff into a new playlist called (quite creatively) "Newest First"
+
+
+### TO-DO:
+## Re-create the Playlists
+    ## Maybe ask interactively if they needed to be sorted by Newest First? If Y, then TAC
+## Delete original Files?
+## Instead of CATing a giant amount of lines, place into text file first? Might be an issue for people with tens of thousands of episodes.
+
+
+Makes a copy of each file for backup purposes :)
+for f in *; do cp "$f" "$f.BKP"; done
+
+
+c[_] -> cat 2.5\ Admins.m3u | grep /202* | sort -r > test.txt
+Does a reverse sort (Aggregate, then sort & reverse sort for oldest and newest first?)
